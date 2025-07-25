@@ -7,12 +7,12 @@ const crypto = require("crypto");
 const { sendEmail } = require("../Utils/email.utils");
 
 const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id }, process.env.SECRET_KEY, {
     expiresIn: process.env.LOGIN_EXPIRES,
   });
 };
 
-exports.createSendResponse = (user, statusCode, res) => {
+const createSendResponse = (user, statusCode, res) => {
   const token = signToken(user._id);
 
   const options = {
@@ -26,7 +26,7 @@ exports.createSendResponse = (user, statusCode, res) => {
 
   user.password = undefined;
 
-  res.cookies("jwt", token, options);
+  res.cookie("jwt", token, options);
 
   res.status(statusCode).json({
     status: "success",

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "SET NODE_ENV=development && nodemon server.js",
-    "start": "SET NODE_ENV=production && nodemon server.js"
+    "dev": "SET NODE_ENV=development&nodemon server.js",
+    "start": "SET NODE_ENV=production&nodemon server.js"
   },
   "author": "",
   "license": "ISC",

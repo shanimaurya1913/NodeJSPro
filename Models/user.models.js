@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    requires: [true, "Name is required"],
+    required: [true, "Name is required"],
   },
   email: {
     type: String,
@@ -90,13 +90,13 @@ userSchema.methods.createResetPasswordToken = function () {
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
-  this.passwordResetTokenExpire = Date.now() * 10 * 60 * 1000;
+  this.passwordResetTokenExpire = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
 };
 
 userSchema.pre(/^find/, function (next) {
-  this.find({ active: { $ne: true } });
+  this.find({ active: true });
   next();
 });
 
